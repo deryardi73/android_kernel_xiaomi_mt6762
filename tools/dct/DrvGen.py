@@ -22,6 +22,12 @@ sys.dont_write_bytecode = True
 
 sys.path.append('.')
 sys.path.append('..')
+# Python 3 removed implicit relative imports. The obj/*.py files use
+# unqualified sibling imports like "from GpioObj import GpioObj" that
+# relied on Python 2's package-relative lookup. Adding obj/ itself to
+# sys.path lets those legacy imports keep resolving without having to
+# patch every file inside obj/ individually.
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'obj'))
 
 from obj.ChipObj import ChipObj
 from obj.ChipObj import Everest
