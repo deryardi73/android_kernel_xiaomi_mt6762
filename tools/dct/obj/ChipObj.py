@@ -168,12 +168,12 @@ class ChipObj:
 
 
     def gen_spec(self, paras):
-        # if cmp(paras[0], 'cust_dtsi') == 0:
+        # if (paras[0]) == ('cust_dtsi'):
             # self.gen_custDtsi()
             # return True
 
         for para in paras:
-            if cmp(para, 'cust_dtsi') == 0:
+            if (para) == ('cust_dtsi'):
                 self.gen_custDtsi()
                 continue
 
@@ -211,7 +211,7 @@ class ChipObj:
         #sorted_list = sorted(self.__objs.keys())
         #for tag in sorted_list:
         for tag in self.__objs.keys():
-            if cmp(tag, 'gpio') == 0:
+            if (tag) == ('gpio'):
                 gpioObj = self.create_obj(tag)
                 gen_str += ModuleObj.writeHeader(gpioObj.get_dtsiFileName())
                 gen_str += gpioObj.fill_mapping_dtsiFile()
@@ -453,6 +453,3 @@ class MT6779(ChipObj):
         ChipObj.replace_obj(self, 'md1_eint', Md1EintObj_MT6739())
         ChipObj.replace_obj(self, "i2c", I2cObj_MT6775())
         ChipObj.refresh_eintGpioMap(self)
-
-
-

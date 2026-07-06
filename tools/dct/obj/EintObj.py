@@ -25,8 +25,8 @@ from utility.util import log
 from utility.util import LogLevel
 from utility.util import compare
 
-from obj.ModuleObj import ModuleObj
-from obj.GpioObj import GpioObj
+from ModuleObj import ModuleObj
+from GpioObj import GpioObj
 
 class EintObj(ModuleObj):
     def __init__(self, gpio_obj):
@@ -43,7 +43,7 @@ class EintObj(ModuleObj):
 
         for node in nodes:
             if node.nodeType == xml.dom.Node.ELEMENT_NODE:
-                if cmp(node.nodeName, 'count') == 0:
+                if (node.nodeName) == ('count'):
                     self.__count = node.childNodes[0].nodeValue
                     continue
 
@@ -161,21 +161,21 @@ class EintObj(ModuleObj):
             polarity = value.get_polarity()
             sensitive = value.get_sensitiveLevel()
 
-            if cmp(polarity, 'High') == 0 and cmp(sensitive, 'Edge') == 0:
+            if (polarity) == ('High') and (sensitive) == ('Edge'):
                 temp = 'CUST_EINTF_TRIGGER_RISING'
-            elif cmp(polarity, 'Low') == 0 and cmp(sensitive, 'Edge') == 0:
+            elif (polarity) == ('Low') and (sensitive) == ('Edge'):
                 temp = 'CUST_EINTF_TRIGGER_FALLING'
-            elif cmp(polarity, 'High') == 0 and cmp(sensitive, 'Level') == 0:
+            elif (polarity) == ('High') and (sensitive) == ('Level'):
                 temp = 'CUST_EINTF_TRIGGER_HIGH'
-            elif cmp(polarity, 'Low') == 0 and cmp(sensitive, 'Level') == 0:
+            elif (polarity) == ('Low') and (sensitive) == ('Level'):
                 temp = 'CUST_EINTF_TRIGGER_LOW'
 
             gen_str += '''#define CUST_EINT_%s_TYPE\t\t\t%s\n''' %(value.get_varName().upper(), temp)
 
             temp = ''
-            if cmp(value.get_debounceEnable(), 'Disable') == 0:
+            if (value.get_debounceEnable()) == ('Disable'):
                 temp = 'CUST_EINT_DEBOUNCE_DISABLE'
-            elif cmp(value.get_debounceEnable(), 'Enable') == 0:
+            elif (value.get_debounceEnable()) == ('Enable'):
                 temp = 'CUST_EINT_DEBOUNCE_ENABLE'
             gen_str += '''#define CUST_EINT_%s_DEBOUNCE_EN\t\t%s\n\n''' %(value.get_varName().upper(), temp)
 
@@ -236,7 +236,7 @@ class EintObj(ModuleObj):
 
     def get_gpioNum(self, eint_num):
         for (key, value) in EintData.get_mapTable().items():
-            if cmp(eint_num, value) == 0:
+            if (eint_num) == (value):
                 return key
 
         return -1
@@ -291,13 +291,13 @@ class EintObj(ModuleObj):
             polarity = value.get_polarity()
             sensitive = value.get_sensitiveLevel()
 
-            if cmp(polarity, 'High') == 0 and cmp(sensitive, 'Edge') == 0:
+            if (polarity) == ('High') and (sensitive) == ('Edge'):
                 temp = 'IRQ_TYPE_EDGE_RISING'
-            elif cmp(polarity, 'Low') == 0 and cmp(sensitive, 'Edge') == 0:
+            elif (polarity) == ('Low') and (sensitive) == ('Edge'):
                 temp = 'IRQ_TYPE_EDGE_FALLING'
-            elif cmp(polarity, 'High') == 0 and cmp(sensitive, 'Level') == 0:
+            elif (polarity) == ('High') and (sensitive) == ('Level'):
                 temp = 'IRQ_TYPE_LEVEL_HIGH'
-            elif cmp(polarity, 'Low') == 0 and cmp(sensitive, 'Level') == 0:
+            elif (polarity) == ('Low') and (sensitive) == ('Level'):
                 temp = 'IRQ_TYPE_LEVEL_LOW'
 
             gen_str += '''\tinterrupts = <%s %s>;\n''' %(self.refGpio(key[4:], True)[0], temp)
@@ -349,17 +349,17 @@ class EintObj_MT6739(EintObj):
             polarity = value.get_polarity()
             sensitive = value.get_sensitiveLevel()
 
-            if cmp(polarity, 'High') == 0 and cmp(sensitive, 'Edge') == 0:
+            if (polarity) == ('High') and (sensitive) == ('Edge'):
                 temp = 'IRQ_TYPE_EDGE_RISING'
-            elif cmp(polarity, 'Low') == 0 and cmp(sensitive, 'Edge') == 0:
+            elif (polarity) == ('Low') and (sensitive) == ('Edge'):
                 temp = 'IRQ_TYPE_EDGE_FALLING'
-            elif cmp(polarity, 'High') == 0 and cmp(sensitive, 'Level') == 0:
+            elif (polarity) == ('High') and (sensitive) == ('Level'):
                 temp = 'IRQ_TYPE_LEVEL_HIGH'
-            elif cmp(polarity, 'Low') == 0 and cmp(sensitive, 'Level') == 0:
+            elif (polarity) == ('Low') and (sensitive) == ('Level'):
                 temp = 'IRQ_TYPE_LEVEL_LOW'
 
             gen_str += '''\tinterrupts = <%s %s %s %d>;\n''' % (key[4:], temp, self.refGpio(key[4:], True)[0], self.refGpio_defMode(key[4:], True))
-            if cmp(value.get_debounceEnable(), 'Enable') == 0:
+            if (value.get_debounceEnable()) == ('Enable'):
                 gen_str += '''\tdeb-gpios = <&pio %s 0>;\n''' % (self.refGpio(key[4:], True)[0])
                 gen_str += '''\tdebounce = <%d>;\n''' % (int(value.get_debounceTime()) * 1000)
             gen_str += '''\tstatus = \"okay\";\n'''

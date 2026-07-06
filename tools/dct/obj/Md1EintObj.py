@@ -62,7 +62,7 @@ class Md1EintObj(ModuleObj):
         try:
             for node in nodes:
                 if node.nodeType == xml.dom.Node.ELEMENT_NODE:
-                    if cmp(node.nodeName, 'count') == 0:
+                    if (node.nodeName) == ('count'):
                         self.__count = node.childNodes[0].nodeValue
                         continue
 
@@ -131,7 +131,7 @@ class Md1EintObj(ModuleObj):
         count = 0
         for key in sorted_key(ModuleObj.get_data(self).keys()):
             value = ModuleObj.get_data(self)[key]
-            if cmp(value.get_varName(), 'NC') == 0:
+            if (value.get_varName()) == ('NC'):
                 continue
             num = key[4:]
             count += 1
@@ -156,7 +156,7 @@ class Md1EintObj(ModuleObj):
         gen_str += '''&eintc {\n'''
         for key in sorted_key(ModuleObj.get_data(self).keys()):
             value = ModuleObj.get_data(self)[key]
-            if cmp(value.get_varName(), 'NC') == 0:
+            if (value.get_varName()) == ('NC'):
                 continue
             num = key[4:]
             gen_str += '''\t%s@%s {\n''' %(value.get_varName(), num)
@@ -166,13 +166,13 @@ class Md1EintObj(ModuleObj):
             polarity = value.get_polarity()
             sensitive = value.get_sensitiveLevel()
 
-            if cmp(polarity, 'High') == 0 and cmp(sensitive, 'Edge') == 0:
+            if (polarity) == ('High') and (sensitive) == ('Edge'):
                 type = 1
-            elif cmp(polarity, 'Low') == 0 and cmp(sensitive, 'Edge') == 0:
+            elif (polarity) == ('Low') and (sensitive) == ('Edge'):
                 type = 2
-            elif cmp(polarity, 'High') == 0 and cmp(sensitive, 'Level') == 0:
+            elif (polarity) == ('High') and (sensitive) == ('Level'):
                 type = 4
-            elif cmp(polarity, 'Low') == 0 and cmp(sensitive, 'Level') == 0:
+            elif (polarity) == ('Low') and (sensitive) == ('Level'):
                 type = 8
 
             gen_str += '''\t\tinterrupts = <%s %d>;\n''' %(num, type)
@@ -206,7 +206,7 @@ class Md1EintObj_MT6739(Md1EintObj):
         gen_str = ''
         for key in sorted_key(ModuleObj.get_data(self).keys()):
             value = ModuleObj.get_data(self)[key]
-            if cmp(value.get_varName(), 'NC') == 0:
+            if (value.get_varName()) == ('NC'):
                 continue
             num = key[4:]
             gen_str += '''&%s {\n''' % (value.get_varName().lower())
@@ -216,13 +216,13 @@ class Md1EintObj_MT6739(Md1EintObj):
             polarity = value.get_polarity()
             sensitive = value.get_sensitiveLevel()
 
-            if cmp(polarity, 'High') == 0 and cmp(sensitive, 'Edge') == 0:
+            if (polarity) == ('High') and (sensitive) == ('Edge'):
                 type = 1
-            elif cmp(polarity, 'Low') == 0 and cmp(sensitive, 'Edge') == 0:
+            elif (polarity) == ('Low') and (sensitive) == ('Edge'):
                 type = 2
-            elif cmp(polarity, 'High') == 0 and cmp(sensitive, 'Level') == 0:
+            elif (polarity) == ('High') and (sensitive) == ('Level'):
                 type = 4
-            elif cmp(polarity, 'Low') == 0 and cmp(sensitive, 'Level') == 0:
+            elif (polarity) == ('Low') and (sensitive) == ('Level'):
                 type = 8
 
             gen_str += '''\tinterrupts = <%s %d>;\n''' % (num, type)

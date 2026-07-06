@@ -17,7 +17,7 @@ import re
 import string
 import xml.dom.minidom
 
-from obj.ModuleObj import ModuleObj
+from ModuleObj import ModuleObj
 from utility.util import log
 from utility.util import LogLevel
 from utility.util import sorted_key

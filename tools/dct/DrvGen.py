@@ -29,21 +29,21 @@ sys.path.append('..')
 # patch every file inside obj/ individually.
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'obj'))
 
-from obj.ChipObj import ChipObj
-from obj.ChipObj import Everest
-from obj.ChipObj import Olympus
-from obj.ChipObj import MT6757_P25
-from obj.ChipObj import Rushmore
-from obj.ChipObj import Whitney
-from obj.ChipObj import MT6759
-from obj.ChipObj import MT6763
-from obj.ChipObj import MT6750S
-from obj.ChipObj import MT6758
-from obj.ChipObj import MT6739
-from obj.ChipObj import MT8695
-from obj.ChipObj import MT6771
-from obj.ChipObj import MT6775
-from obj.ChipObj import MT6779
+from ChipObj import ChipObj
+from ChipObj import Everest
+from ChipObj import Olympus
+from ChipObj import MT6757_P25
+from ChipObj import Rushmore
+from ChipObj import Whitney
+from ChipObj import MT6759
+from ChipObj import MT6763
+from ChipObj import MT6750S
+from ChipObj import MT6758
+from ChipObj import MT6739
+from ChipObj import MT8695
+from ChipObj import MT6771
+from ChipObj import MT6775
+from ChipObj import MT6779
 
 from utility.util import LogLevel
 from utility.util import log
