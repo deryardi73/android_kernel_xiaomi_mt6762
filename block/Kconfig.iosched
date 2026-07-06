@@ -26,7 +26,6 @@ config IOSCHED_ZEN
 	default y
 	---help---
 	  Zen IO scheduler
-      Primarily based on Noop, deadline, and SIO IO schedulers.
 
 config IOSCHED_CFQ
 	tristate "CFQ I/O scheduler"
