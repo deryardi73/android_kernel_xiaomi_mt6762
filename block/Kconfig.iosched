@@ -4,7 +4,7 @@ menu "IO Schedulers"
 
 config IOSCHED_NOOP
 	bool "No-op I/O scheduler"
-	default y
+	default n
 	---help---
 	  The no-op I/O scheduler is a minimal scheduler that does basic merging
 	  and sorting. Its main uses include non-disk based block devices like
@@ -20,6 +20,13 @@ config IOSCHED_DEADLINE
 	  CSCAN service with FIFO expiration of requests, switching to
 	  a new point in the service tree and doing a batch of IO from there
 	  in case of expiry.
+
+config IOSCHED_ZEN
+	tristate "ZEN I/O scheduler"
+	default y
+	---help---
+	  Zen IO scheduler
+      Primarily based on Noop, deadline, and SIO IO schedulers.
 
 config IOSCHED_CFQ
 	tristate "CFQ I/O scheduler"
@@ -41,10 +48,13 @@ config CFQ_GROUP_IOSCHED
 
 choice
 	prompt "Default I/O scheduler"
-	default DEFAULT_CFQ
+	default DEFAULT_ZEN
 	help
 	  Select the I/O scheduler which will be used by default for all
 	  block devices.
+
+	config DEFAULT_ZEN
+		bool "ZEN" if IOSCHED_ZEN=y
 
 	config DEFAULT_DEADLINE
 		bool "Deadline" if IOSCHED_DEADLINE=y
@@ -59,6 +69,7 @@ endchoice
 
 config DEFAULT_IOSCHED
 	string
+	default "zen" if DEFAULT_ZEN
 	default "deadline" if DEFAULT_DEADLINE
 	default "cfq" if DEFAULT_CFQ
 	default "noop" if DEFAULT_NOOP
